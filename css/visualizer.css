@@ -1,0 +1,232 @@
+/* ==========================================================================
+   SpringSec Master - Filter Chain Simulator Styles
+   Visual Flow Canvas, Interactive Nodes, Glowing States & Control Bar
+   ========================================================================== */
+
+.sim-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sim-controls-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.sim-scenario-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sim-scenario-selector label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.sim-scenario-select {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  min-width: 280px;
+  cursor: pointer;
+}
+
+.sim-playback-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Request Preview Header */
+.sim-request-bar {
+  background: #0d1117;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.sim-method-badge {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.sim-url {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.sim-headers-preview {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  max-width: 450px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Visual Canvas Layout */
+.sim-canvas {
+  background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.95), #070b12);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  position: relative;
+  overflow-x: auto;
+}
+
+.sim-flow-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 1050px;
+  gap: 0.75rem;
+}
+
+/* Individual Filter Nodes */
+.sim-node {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 0.75rem;
+  text-align: center;
+  width: 130px;
+  min-height: 95px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.sim-node-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.sim-node-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  line-height: 1.2;
+}
+
+.sim-node-layer {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+}
+
+/* Flow connector arrows */
+.sim-arrow {
+  color: var(--text-dim);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Node States */
+.sim-node.passed {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+.sim-node.passed .sim-node-title {
+  color: #a7f3d0;
+}
+
+.sim-node.active {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.18);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+  transform: scale(1.08);
+}
+.sim-node.active .sim-node-title {
+  color: #ffffff;
+}
+
+.sim-node.failed {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
+  transform: scale(1.08);
+}
+.sim-node.failed .sim-node-title {
+  color: #fca5a5 !important;
+}
+
+/* Execution Log Card */
+.sim-log-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.sim-log-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sim-log-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sim-log-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.sim-log-status-box {
+  background: #0d1117;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.sim-step-counter {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--spring-green);
+  text-transform: uppercase;
+}
+
+.sim-log-context {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #38bdf8;
+}

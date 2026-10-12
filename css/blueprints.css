@@ -1,0 +1,161 @@
+/* ==========================================================================
+   SpringSec Master - System Design Blueprints Styles
+   Architectural Blueprints, SVG Diagrams & Comparative Trade-off Tables
+   ========================================================================== */
+
+.blueprints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.blueprint-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-fast);
+}
+
+.blueprint-card:hover {
+  border-color: rgba(109, 179, 63, 0.3);
+}
+
+.bp-header {
+  margin-bottom: 1.75rem;
+}
+
+.bp-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0.25rem;
+  color: #ffffff;
+}
+
+.bp-tagline {
+  font-size: 1rem;
+  color: var(--spring-green);
+  font-weight: 600;
+}
+
+.bp-diagram-wrapper {
+  background: #0b0f19;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.blueprint-svg {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+}
+
+.bp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bp-summary {
+  font-size: 1.05rem;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-subtitle::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background: var(--spring-green);
+  border-radius: 2px;
+}
+
+/* Tradeoff Table */
+.tradeoff-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: #0d1117;
+}
+
+.tradeoff-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.tradeoff-table th {
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f5f9;
+  font-weight: 700;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.tradeoff-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: #cbd5e1;
+  vertical-align: top;
+}
+
+.tradeoff-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tradeoff-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Deep Dive Markdown styling */
+.bp-deepdive {
+  background: var(--bg-surface);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.bp-deepdive h3 {
+  font-size: 1.1rem;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+}
+
+.bp-deepdive p {
+  margin-bottom: 0.75rem;
+}
+
+.bp-deepdive ul, .bp-deepdive ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.bp-deepdive code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fde047;
+  font-size: 0.85em;
+}

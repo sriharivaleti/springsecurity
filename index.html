@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpringSec Master | Zero to Staff Security Architect in Spring Security 6</title>
+  <meta name="description" content="Interactive learning platform for mastering Spring Security 6 and Cloud-Native System Design. 50 production-grade blueprints, interactive filter chain simulator, JWT debugger, and architecture studio.">
+  <meta name="keywords" content="Spring Security 6, Spring Boot 3, JWT, OAuth2, OpenID Connect, System Design, Microservices, Zero-Trust, FilterChain, Method Security">
+  <meta name="author" content="SpringSec Master Community">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/visualizer.css">
+  <link rel="stylesheet" href="css/blueprints.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="app-container nav-inner">
+      <a href="#overview" class="brand">
+        <img src="assets/favicon.svg" alt="Spring Security Shield" class="brand-icon">
+        <span class="brand-text">SpringSec<span>Master</span></span>
+        <span class="brand-badge">v6.3+</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#overview" class="nav-link active" data-tab="overview">Overview</a></li>
+        <li><a href="#examples" class="nav-link" data-tab="examples">50 Blueprints</a></li>
+        <li><a href="#blueprints" class="nav-link" data-tab="blueprints">System Design</a></li>
+        <li><a href="#simulator" class="nav-link" data-tab="simulator">Filter Chain Simulator</a></li>
+        <li><a href="#generator" class="nav-link" data-tab="generator">Config Generator</a></li>
+        <li><a href="#jwt-debugger" class="nav-link" data-tab="jwt-debugger">JWT Inspector</a></li>
+        <li><a href="#quiz" class="nav-link" data-tab="quiz">Mastery Assessment</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="nav-progress" title="Zero-to-Mastery Progress Tracker">
+          <div class="nav-progress-meta">
+            <span>Mastery</span>
+            <span id="nav-progress-text">0/50 Mastered (0%)</span>
+          </div>
+          <div class="progress-track">
+            <div id="nav-progress-bar" class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+
+        <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Areas -->
+  <main class="app-container">
+
+    <!-- ==========================================
+         TAB 1: OVERVIEW & ROADMAP
+         ========================================== -->
+    <section id="tab-overview" class="tab-pane active">
+      <div class="hero">
+        <div class="hero-pill">🛡️ The Definitive Spring Security 6 & System Design Curriculum</div>
+        <h1 class="hero-title">From Zero to <span class="gradient-text">Staff Security Architect</span></h1>
+        <p class="hero-desc">
+          Master the internal mechanics of Spring Security 6.3+, Spring Boot 3 Lambda DSL, stateless JWT pipelines, OAuth2/OIDC topologies, Reactive WebFlux security, and Zero-Trust cloud microservice architecture through 50 production-grade blueprints.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#examples" class="btn btn-primary" onclick="window.app.switchTab('examples')">
+            🚀 Explore 50 Production Blueprints
+          </a>
+          <a href="#simulator" class="btn btn-outline" onclick="window.app.switchTab('simulator')">
+            ⚡ Launch Filter Chain Simulator
+          </a>
+          <a href="#blueprints" class="btn btn-outline" onclick="window.app.switchTab('blueprints')">
+            📐 System Design Studio
+          </a>
+        </div>
+
+        <!-- Metrics Strip -->
+        <div class="metrics-strip">
+          <div class="metric-box">
+            <div class="metric-num highlight">50</div>
+            <div class="metric-label">Production Blueprints</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num">6</div>
+            <div class="metric-label">Progressive Skill Tiers</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num" id="metric-completed-count">0 / 50</div>
+            <div class="metric-label">Examples Mastered</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-num highlight" id="metric-completed-percent">0%</div>
+            <div class="metric-label">Curriculum Completion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zero to Master 6-Tier Interactive Roadmap -->
+      <div class="section-header" style="margin-top: 2rem;">
+        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">The Zero-to-Mastery Learning Roadmap</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">
+          Each tier builds upon the foundational mechanics of the Spring framework and scales to enterprise distributed topologies.
+        </p>
+      </div>
+
+      <div class="curriculum-grid">
+        <!-- Tier 0 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 0</span>
+            <span class="badge diff-beginner">Beginner</span>
+          </div>
+          <h3 class="level-card-title">Foundations & Architecture Internals</h3>
+          <p class="level-card-desc">
+            Understand how servlet requests enter Spring via DelegatingFilterProxy, how FilterChainProxy resolves SecurityFilterChain, and how SecurityContextHolder preserves state.
+          </p>
+          <ul class="level-card-topics">
+            <li>Modern Lambda DSL (No deprecated WebSecurityConfigurerAdapter)</li>
+            <li>In-Memory vs Database JPA UserDetailsService</li>
+            <li>Role-Based Access Control (RBAC): hasRole vs hasAuthority</li>
+            <li>Hierarchical Roles (RoleHierarchy) & SpEL Method Security</li>
+            <li>Custom JSON AccessDeniedHandler & AuthenticationEntryPoint</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='0'; window.app.switchTab('examples');">
+            View Tier 0 Blueprints (8) →
+          </button>
+        </div>
+
+        <!-- Tier 1 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 1</span>
+            <span class="badge diff-intermediate">Intermediate</span>
+          </div>
+          <h3 class="level-card-title">Core Authentication & Stateful Sessions</h3>
+          <p class="level-card-desc">
+            Stateful security patterns: Custom login workflows, remember-me persistence, session fixation protection, and clustered Redis session synchronization.
+          </p>
+          <ul class="level-card-topics">
+            <li>Form Login with Failure Handlers & SavedRequest redirection</li>
+            <li>Persistent Database Remember-Me Token Repository</li>
+            <li>Concurrent Session Control (Limit to 1 active device)</li>
+            <li>Clustered Redis Sessions via Spring Session</li>
+            <li>CORS Configuration & Double-Submit CSRF for SPAs</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='1'; window.app.switchTab('examples');">
+            View Tier 1 Blueprints (7) →
+          </button>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 2</span>
+            <span class="badge diff-intermediate">Intermediate</span>
+          </div>
+          <h3 class="level-card-title">Modern REST APIs & Stateless Security</h3>
+          <p class="level-card-desc">
+            Pure stateless microservice security: JSON Web Tokens, cryptographic signing, rotating refresh tokens, and instant Redis token blacklisting.
+          </p>
+          <ul class="level-card-topics">
+            <li>Complete OncePerRequestFilter Stateless JWT Pipeline</li>
+            <li>Asymmetric RSA (RS256) Signing with Nimbus JOSE</li>
+            <li>Refresh Token Rotation & Anti-Theft Family Revocation</li>
+            <li>Sub-millisecond Redis Token Blacklist for Instant Force Logout</li>
+            <li>API Key Machine-to-Machine Ingestion & Multi-Provider Manager</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='2'; window.app.switchTab('examples');">
+            View Tier 2 Blueprints (6) →
+          </button>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 3</span>
+            <span class="badge diff-advanced">Advanced</span>
+          </div>
+          <h3 class="level-card-title">OAuth2, OpenID Connect & Federated Identity</h3>
+          <p class="level-card-desc">
+            Federated authorization flows, Social Logins, Resource Server validation, dynamic multi-tenant issuer routing, and building your own Authorization Server.
+          </p>
+          <ul class="level-card-topics">
+            <li>OAuth2 Social Login with Google & GitHub (User Info DB sync)</li>
+            <li>Resource Server with Keycloak/Okta nested claims converter</li>
+            <li>Opaque Token Introspection (RFC 7662) with Caffeine Cache</li>
+            <li>Standalone Spring Authorization Server with PKCE</li>
+            <li>Client Credentials Flow for Automated Batch Jobs</li>
+            <li>Multi-Tenant Dynamic Issuer Resolution per Organization</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='3'; window.app.switchTab('examples');">
+            View Tier 3 Blueprints (6) →
+          </button>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 4</span>
+            <span class="badge diff-advanced">Advanced</span>
+          </div>
+          <h3 class="level-card-title">Microservices & Distributed Security</h3>
+          <p class="level-card-desc">
+            Edge gateway security, token propagation, the Backend-for-Frontend (BFF) architectural pattern, Mutual TLS (mTLS), and brute-force mitigation.
+          </p>
+          <ul class="level-card-topics">
+            <li>Spring Cloud Gateway with Token Relay Gateway Filter</li>
+            <li>Backend-for-Frontend (BFF) Pattern with HttpOnly Session Cookies</li>
+            <li>Mutual TLS (mTLS) Inter-Service Cryptographic Handshake</li>
+            <li>Bucket4j Token Bucket Rate Limiting per IP</li>
+            <li>Anti-Bot Cloudflare Turnstile & 2FA / TOTP Authenticator</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='4'; window.app.switchTab('examples');">
+            View Tier 4 Blueprints (6) →
+          </button>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="level-card">
+          <div class="level-badge-header">
+            <span class="level-number">Tier 5</span>
+            <span class="badge diff-staff-architect">Staff Architect</span>
+          </div>
+          <h3 class="level-card-title">Enterprise, Reactive WebFlux & Zero-Trust</h3>
+          <p class="level-card-desc">
+            The pinnacle of application security: Reactive non-blocking WebFlux security, SAML 2.0 enterprise SSO, LDAP directory trees, ABAC, ACLs, and SPIFFE/SPIRE mesh.
+          </p>
+          <ul class="level-card-topics">
+            <li>WebFlux Reactive SecurityWebFilterChain & Reactive Method Security</li>
+            <li>Enterprise SAML 2.0 Single Sign-On (Okta / Azure AD)</li>
+            <li>Active Directory LDAP Authentication with Group Mapping</li>
+            <li>Attribute-Based Access Control (ABAC) with Custom Expression Root</li>
+            <li>Domain-Object ACLs, Multi-Tenant Database Isolation, CSP/HSTS</li>
+            <li>Transparent Argon2 Password Hash Migration on Login</li>
+            <li>Zero-Trust Microservice Mesh with SPIFFE IDs & Token Exchange</li>
+          </ul>
+          <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='5'; window.app.switchTab('examples');">
+            View Tier 5 Blueprints (17) →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: 50 PRODUCTION EXAMPLES
+         ========================================== -->
+    <section id="tab-examples" class="tab-pane">
+      <div class="section-header">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">50 Production-Grade Security Blueprints</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+          Production-tested implementations written in modern Spring Boot 3.3+ and Spring Security 6.3+ Lambda DSL. Includes full Java configs, services, <code style="color: #fde047;">application.yml</code>, integration tests, and security vulnerability pitfall warnings.
+        </p>
+      </div>
+
+      <!-- Search and Filter Bar -->
+      <div class="filter-toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search by keyword (e.g. JWT, OAuth2, Redis, WebFlux, CSRF, Testing)...">
+        </div>
+
+        <div class="select-filters">
+          <select id="filter-level" class="filter-select">
+            <option value="all">All Levels (Level 0 - 5)</option>
+            <option value="0">Level 0: Foundations</option>
+            <option value="1">Level 1: Core Auth</option>
+            <option value="2">Level 2: Modern REST</option>
+            <option value="3">Level 3: OAuth2 / OIDC</option>
+            <option value="4">Level 4: Microservices</option>
+            <option value="5">Level 5: Enterprise & Zero-Trust</option>
+          </select>
+
+          <select id="filter-category" class="filter-select">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="examples-count" style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.5rem; font-weight: 600;">
+        Showing 50 of 50 Production Blueprints
+      </div>
+
+      <!-- Grid of 50 Examples -->
+      <div id="examples-grid" class="examples-grid">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: SYSTEM DESIGN BLUEPRINTS STUDIO
+         ========================================== -->
+    <section id="tab-blueprints" class="tab-pane">
+      <div class="section-header">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">System Design Architecture Blueprints</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem;">
+          Deep architectural diagrams, failure modes, trade-off matrices, and network topologies for designing enterprise security systems in cloud-native Java.
+        </p>
+      </div>
+
+      <div id="blueprints-container" class="blueprints-list">
+        <!-- Rendered dynamically from system-design-data.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: FILTER CHAIN SIMULATOR
+         ========================================== -->
+    <section id="tab-simulator" class="tab-pane">
+      <div class="section-header">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Interactive Security Filter Chain Visualizer</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+          Trace how real HTTP packets traverse the Spring Security 6 filter chain step-by-step. Inspect internal transitions between <code style="color: #38bdf8;">DelegatingFilterProxy</code>, <code style="color: #38bdf8;">FilterChainProxy</code>, authentication managers, and security context handlers.
+        </p>
+      </div>
+
+      <div class="sim-container">
+        <!-- Controls Header Card -->
+        <div class="sim-controls-card">
+          <div class="sim-scenario-selector">
+            <label for="sim-scenario-select">Request Scenario:</label>
+            <select id="sim-scenario-select" class="sim-scenario-select">
+              <!-- Rendered by filter-chain-sim.js -->
+            </select>
+          </div>
+
+          <div class="sim-playback-controls">
+            <button id="sim-btn-prev" class="btn btn-outline btn-sm">⏮ Prev</button>
+            <button id="sim-btn-play" class="btn btn-primary btn-sm">▶ Auto Play</button>
+            <button id="sim-btn-next" class="btn btn-outline btn-sm">Next ⏭</button>
+            <button id="sim-btn-reset" class="btn btn-outline btn-sm" title="Reset Simulation">🔄</button>
+          </div>
+        </div>
+
+        <!-- Incoming Request Preview Bar -->
+        <div class="sim-request-bar">
+          <span id="sim-req-method" class="sim-method-badge">POST</span>
+          <span id="sim-req-url" class="sim-url">/api/orders</span>
+          <span id="sim-req-headers" class="sim-headers-preview">Authorization: Bearer eyJhbGciOiJSUzI1Ni...</span>
+        </div>
+
+        <!-- Canvas with Flow Nodes -->
+        <div class="sim-canvas">
+          <div class="sim-flow-grid">
+            <div id="node-client" class="sim-node">
+              <div class="sim-node-icon">🌐</div>
+              <div class="sim-node-title">Client Request</div>
+              <div class="sim-node-layer">HTTP Transport</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-delegating" class="sim-node">
+              <div class="sim-node-icon">🔌</div>
+              <div class="sim-node-title">DelegatingFilterProxy</div>
+              <div class="sim-node-layer">Servlet Filter</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-filterchainproxy" class="sim-node">
+              <div class="sim-node-icon">🔀</div>
+              <div class="sim-node-title">FilterChainProxy</div>
+              <div class="sim-node-layer">Spring Security</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-cors" class="sim-node">
+              <div class="sim-node-icon">🌍</div>
+              <div class="sim-node-title">CorsFilter</div>
+              <div class="sim-node-layer">Preflight Handler</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-csrf" class="sim-node">
+              <div class="sim-node-icon">🛡️</div>
+              <div class="sim-node-title">CsrfFilter</div>
+              <div class="sim-node-layer">Token Verifier</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-auth-filter" class="sim-node">
+              <div class="sim-node-icon">🔑</div>
+              <div class="sim-node-title">JwtAuthFilter</div>
+              <div class="sim-node-layer">OncePerRequest</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-security-context" class="sim-node">
+              <div class="sim-node-icon">💾</div>
+              <div class="sim-node-title">SecurityContextHolder</div>
+              <div class="sim-node-layer">ThreadLocal State</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-authorization" class="sim-node">
+              <div class="sim-node-icon">⚖️</div>
+              <div class="sim-node-title">AuthorizationFilter</div>
+              <div class="sim-node-layer">SS6 Access Decider</div>
+            </div>
+            <div class="sim-arrow">➔</div>
+
+            <div id="node-controller" class="sim-node">
+              <div class="sim-node-icon">🎯</div>
+              <div class="sim-node-title">@RestController</div>
+              <div class="sim-node-layer">Business Domain</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Execution Log Card -->
+        <div class="sim-log-card">
+          <div class="sim-log-info">
+            <h3 id="sim-log-title" class="sim-log-title">Step 1: Client Dispatches Request</h3>
+            <p id="sim-log-desc" class="sim-log-desc">Waiting to execute simulation...</p>
+          </div>
+
+          <div class="sim-log-status-box">
+            <div id="sim-step-counter" class="sim-step-counter">Step 1 of 10</div>
+            <div id="sim-log-context" class="sim-log-context">SecurityContext: Unauthenticated</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 5: CONFIG GENERATOR
+         ========================================== -->
+    <section id="tab-generator" class="tab-pane">
+      <div class="section-header">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Spring Security 6 Config Generator</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+          Customize your architecture options and live-generate production-ready, clean Spring Boot 3 <code style="color: #6db33f;">SecurityConfig.java</code> code.
+        </p>
+      </div>
+
+      <div class="generator-grid">
+        <!-- Configuration Form -->
+        <div class="generator-form-card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: #ffffff;">Architecture Parameters</h3>
+
+          <div class="form-group">
+            <label for="cfg-auth-mode">Authentication Pipeline Mode</label>
+            <select id="cfg-auth-mode" class="form-select">
+              <option value="jwt">Stateless REST API (JWT Filter)</option>
+              <option value="oauth2-rs">OAuth2 Resource Server (Remote IdP / JWKS)</option>
+              <option value="session">Stateful Web Application (Session / Form Login)</option>
+              <option value="basic">HTTP Basic Authentication</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-csrf">CSRF Protection</label>
+            <select id="cfg-csrf" class="form-select">
+              <option value="disabled">Disabled (Stateless REST API standard)</option>
+              <option value="cookie-spa">CookieCsrfTokenRepository (Single Page Apps)</option>
+              <option value="default">Default Form CSRF</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-cors">CORS Configuration</label>
+            <select id="cfg-cors" class="form-select">
+              <option value="custom">Strict Whitelisted Allowed Origins</option>
+              <option value="allow-all">Allow All Origins (*)</option>
+              <option value="disabled">Disabled / Handled by Cloudflare</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-public-paths">Public Endpoints (Comma separated)</label>
+            <input type="text" id="cfg-public-paths" class="form-input" value="/api/public/**, /swagger-ui/**, /v3/api-docs/**, /actuator/health">
+          </div>
+
+          <div class="form-group">
+            <label for="cfg-admin-paths">Admin Endpoints (ROLE_ADMIN)</label>
+            <input type="text" id="cfg-admin-paths" class="form-input" value="/api/admin/**">
+          </div>
+
+          <div class="form-group" style="gap: 0.75rem; margin-top: 0.5rem;">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="cfg-method-security" checked>
+              <span>Enable Method Security (@EnableMethodSecurity)</span>
+            </label>
+
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="cfg-role-hierarchy" checked>
+              <span>Enable Role Hierarchy (RoleHierarchyImpl)</span>
+            </label>
+
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="cfg-json-exceptions" checked>
+              <span>RFC 7807 JSON Error Handlers (401/403)</span>
+            </label>
+
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="cfg-hsts" checked>
+              <span>Strict Security Headers (HSTS, FrameOptions)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Generated Code Preview -->
+        <div class="generator-preview-card">
+          <div class="generator-preview-header">
+            <span class="generator-preview-title">SecurityConfig.java (Spring Boot 3.3+)</span>
+            <button id="cfg-btn-copy" class="btn btn-sm btn-outline">📋 Copy Java Code</button>
+          </div>
+          <div class="code-container" style="border-radius: 0; border: none;">
+            <pre><code id="cfg-code-output">// Generating configuration...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 6: JWT TOKEN INSPECTOR & DEBUGGER
+         ========================================== -->
+    <section id="tab-jwt-debugger" class="tab-pane">
+      <div class="section-header">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Interactive JWT Inspector & Token Debugger</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+          Inspect, decode, and evaluate JSON Web Tokens in real time. Validate standard claims (<code style="color: #38bdf8;">exp</code>, <code style="color: #38bdf8;">nbf</code>, <code style="color: #38bdf8;">iss</code>, <code style="color: #38bdf8;">sub</code>) and preview how Spring Security maps authorities.
+        </p>
+      </div>
+
+      <div class="jwt-debugger-grid">
+        <!-- Input Column -->
+        <div class="jwt-input-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="jwt-input" style="font-size: 0.9rem; font-weight: 700; color: #ffffff;">Raw Encoded Token (Bearer):</label>
+            <div id="jwt-status-badge" class="badge badge-success">ACTIVE</div>
+          </div>
+
+          <textarea id="jwt-input" class="jwt-textarea" placeholder="Paste an encoded JWT here (header.payload.signature)..."></textarea>
+
+          <div class="jwt-presets-row">
+            <span style="font-size: 0.8rem; color: var(--text-dim); margin-right: 0.25rem;">Quick Presets:</span>
+            <button id="jwt-btn-user" class="btn btn-sm btn-outline">User Token</button>
+            <button id="jwt-btn-admin" class="btn btn-sm btn-outline">Admin Token</button>
+            <button id="jwt-btn-expired" class="btn btn-sm btn-outline">Expired Token</button>
+          </div>
+
+          <!-- Spring Security Principal Preview -->
+          <div class="jwt-part-box" style="margin-top: 1rem;">
+            <div class="jwt-part-title" style="color: var(--spring-green);">
+              Simulated Spring Security Authentication Principal
+            </div>
+            <pre class="jwt-part-code"><code id="jwt-out-spring-context">// Decoded Authentication context will appear here</code></pre>
+          </div>
+        </div>
+
+        <!-- Decoded Output Column -->
+        <div class="jwt-output-card">
+          <!-- Header -->
+          <div class="jwt-part-box">
+            <div class="jwt-part-title header-title">Header: Algorithm & Key ID</div>
+            <pre class="jwt-part-code"><code id="jwt-out-header">// Header JSON</code></pre>
+          </div>
+
+          <!-- Payload -->
+          <div class="jwt-part-box">
+            <div class="jwt-part-title payload-title">Payload: Claims & Authorities</div>
+            <pre class="jwt-part-code"><code id="jwt-out-payload">// Payload Claims JSON</code></pre>
+          </div>
+
+          <!-- Signature -->
+          <div class="jwt-part-box">
+            <div class="jwt-part-title sig-title">Signature: Cryptographic Proof</div>
+            <pre class="jwt-part-code" style="word-break: break-all;"><code id="jwt-out-sig">// Raw Signature Bytes</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 7: MASTERY ASSESSMENT & CERTIFICATE
+         ========================================== -->
+    <section id="tab-quiz" class="tab-pane">
+      <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Spring Security 6 Architectural Assessment</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem;">
+          Test your production mastery across all 6 skill tiers. Score 75% or higher to unlock your verified <strong>Spring Security Certified Master Credential</strong> and portfolio badge!
+        </p>
+      </div>
+
+      <div id="quiz-card" class="quiz-card">
+        <div class="quiz-header">
+          <div class="quiz-meta">
+            <span id="quiz-level-badge" class="badge badge-level">Level 0: Foundations</span>
+            <span id="quiz-progress-text" class="quiz-counter">Question 1 of 12</span>
+          </div>
+          <div class="quiz-progress-bar">
+            <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="quiz-body">
+          <h3 id="quiz-question-text" class="quiz-question">Loading question...</h3>
+          <div id="quiz-options-container" class="quiz-options"></div>
+          <div id="quiz-feedback" class="quiz-feedback" style="display: none;"></div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="quiz-btn-next" class="btn btn-primary" style="display: none;">Next Question →</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       MODAL 1: EXAMPLE DETAIL MODAL
+       ========================================== -->
+  <div id="example-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 id="modal-ex-title" class="modal-title">Blueprint Title</h2>
+          <div id="modal-ex-badges" class="modal-badges"></div>
+        </div>
+        <button class="modal-close" onclick="window.app.closeExampleModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Real World Scenario -->
+        <div class="modal-section">
+          <div class="modal-section-title">Production Scenario</div>
+          <p id="modal-ex-scenario"></p>
+        </div>
+
+        <!-- Architecture Flow -->
+        <div class="modal-section">
+          <div class="modal-section-title">Architecture & Internal Mechanics</div>
+          <p id="modal-ex-arch"></p>
+        </div>
+
+        <!-- Code Tabs Navigation -->
+        <div class="modal-tabs-nav">
+          <button class="modal-tab-btn active" data-tab="java" onclick="window.app.switchModalTab('java')">Java Implementation</button>
+          <button class="modal-tab-btn" data-tab="config" onclick="window.app.switchModalTab('config')">application.yml</button>
+          <button class="modal-tab-btn" data-tab="test" onclick="window.app.switchModalTab('test')">Integration Tests</button>
+          <button class="modal-tab-btn" data-tab="pitfalls" onclick="window.app.switchModalTab('pitfalls')">⚠️ Pitfalls & Security Gotchas</button>
+        </div>
+
+        <!-- Code Tab: Java -->
+        <div id="tab-content-java" class="modal-tab-content active">
+          <div class="code-container">
+            <pre><code id="modal-code-java"></code></pre>
+          </div>
+        </div>
+
+        <!-- Code Tab: Config -->
+        <div id="tab-content-config" class="modal-tab-content">
+          <div class="code-container">
+            <pre><code id="modal-code-config"></code></pre>
+          </div>
+        </div>
+
+        <!-- Code Tab: Test -->
+        <div id="tab-content-test" class="modal-tab-content">
+          <div class="code-container">
+            <pre><code id="modal-code-test"></code></pre>
+          </div>
+        </div>
+
+        <!-- Code Tab: Pitfalls -->
+        <div id="tab-content-pitfalls" class="modal-tab-content">
+          <div class="bp-deepdive" style="border-left-color: #f43f5e; background: rgba(244, 63, 94, 0.08);">
+            <h4 style="color: #f87171; margin-bottom: 0.5rem; font-weight: 700;">Critical Security Vulnerability Pitfall:</h4>
+            <p id="modal-ex-pitfalls" style="color: #fca5a5; font-size: 0.95rem;"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="modal-btn-copy" class="btn btn-outline" onclick="window.app.copyCurrentModalCode()">
+          📋 Copy Code
+        </button>
+        <button id="modal-btn-complete" class="btn btn-primary">
+          Mark as Mastered
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: CERTIFICATE OF MASTERY MODAL
+       ========================================== -->
+  <div id="cert-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 950px;">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">🏆 Spring Security 6 Architectural Credential</h2>
+          <p style="color: var(--text-dim); font-size: 0.85rem;">Official Proof of Architectural Mastery for GitHub & LinkedIn</p>
+        </div>
+        <button class="modal-close" onclick="closeCertificateModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="cert-name-input">Full Recipient Name:</label>
+          <input type="text" id="cert-name-input" class="form-input" value="Senior Cloud Architect" placeholder="Enter your full name">
+        </div>
+
+        <div class="cert-canvas-wrapper">
+          <canvas id="cert-canvas" width="1200" height="800" class="cert-canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="cert-btn-badge" class="btn btn-outline">
+          ⭐ Copy GitHub Badge Markdown
+        </button>
+        <button id="cert-btn-download" class="btn btn-primary">
+          📥 Download High-Res Certificate (PNG)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="app-container footer-inner">
+      <div>
+        <div style="font-weight: 700; color: #ffffff; margin-bottom: 0.25rem;">
+          🛡️ SpringSec Master Learning Platform
+        </div>
+        <div class="footer-author">
+          Engineered for Java & Spring Boot Architects worldwide. Released under Apache 2.0.
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#overview">Curriculum</a>
+        <a href="#examples">50 Blueprints</a>
+        <a href="#blueprints">System Design</a>
+        <a href="#simulator">Simulator</a>
+        <a href="https://spring.io/projects/spring-security" target="_blank" rel="noopener noreferrer">Spring Docs</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="js/examples-data.js"></script>
+  <script src="js/system-design-data.js"></script>
+  <script src="js/filter-chain-sim.js"></script>
+  <script src="js/config-generator.js"></script>
+  <script src="js/jwt-debugger.js"></script>
+  <script src="js/quiz-data.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
