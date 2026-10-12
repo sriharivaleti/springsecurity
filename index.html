@@ -93,6 +93,66 @@
           </a>
         </div>
 
+        <!-- ==========================================
+             NEW: THE LAYMAN'S GUIDE & MENTAL MODEL
+             ========================================== -->
+        <div class="layman-card" style="text-align: left; background: #0d1424; border: 1px solid rgba(109, 179, 63, 0.35); border-radius: var(--radius-lg); padding: 2rem; margin: 2.5rem auto 3.5rem; max-width: 950px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <span style="font-size: 1.8rem;">🛫</span>
+            <div>
+              <h3 style="font-size: 1.35rem; color: #ffffff; margin: 0;">Spring Security Explained for Beginners: The "Airport Security" Analogy</h3>
+              <p style="color: var(--spring-green); font-size: 0.85rem; font-weight: 600; margin: 0;">Plain English Mental Model Before Writing Any Code</p>
+            </div>
+          </div>
+          
+          <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            At its core, all of Spring Security does only <strong>two simple things</strong>:
+            <br>
+            1. <strong>Authentication (AuthN)</strong>: <em>"Who are you?"</em> (Checking your passport & face).
+            <br>
+            2. <strong>Authorization (AuthZ)</strong>: <em>"Where are you allowed to go?"</em> (Checking if your boarding pass allows you into the First Class Lounge or the Cockpit).
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">1. The Airport Entrance</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>Tomcat / Servlet</strong>: The passenger arrives at the airport building holding an HTTP request ticket.</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">2. The Security Gates Line</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>SecurityFilterChain</strong>: A queue of security guards. Every passenger must walk past guard #1, guard #2, guard #3 in strict order.</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">3. The ID Scanner</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>AuthenticationManager</strong>: Inspects your passport or JWT badge. Verifies the cryptographic seal isn't fake.</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">4. The VIP Wristband</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>SecurityContextHolder</strong>: You receive a colored wristband with your permissions (<code>ROLE_USER</code>, <code>ROLE_ADMIN</code>).</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">5. Gate Guard (Authorization)</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>AuthorizationFilter</strong>: The guard at the boarding gate checks your wristband before letting you onto the plane.</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1rem;">
+              <h4 style="color: #38bdf8; font-size: 0.9rem; margin-bottom: 0.35rem;">6. The Meat Grinder (Passwords)</h4>
+              <p style="color: #94a3b8; font-size: 0.82rem; margin: 0;"><strong>PasswordEncoder (BCrypt)</strong>: Turns your password into mince. You can verify it against another mince, but nobody can turn it back into a cow!</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+            <span style="font-size: 0.8rem; color: #94a3b8;">Quick Rule of Thumb:</span>
+            <span class="badge badge-error">401 Unauthorized</span> <span style="font-size: 0.8rem; color: #94a3b8;">= "I don't know who you are (Please log in)"</span>
+            <span style="margin: 0 0.5rem; color: #475569;">|</span>
+            <span class="badge badge-warning">403 Forbidden</span> <span style="font-size: 0.8rem; color: #94a3b8;">= "I know who you are, but you cannot enter here"</span>
+          </div>
+        </div>
+
         <!-- Metrics Strip -->
         <div class="metrics-strip">
           <div class="metric-box">
