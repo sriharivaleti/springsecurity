@@ -36,12 +36,14 @@
 
       <ul class="nav-links">
         <li><a href="#overview" class="nav-link active" data-tab="overview">Overview</a></li>
+        <li><a href="#beginner" class="nav-link" data-tab="beginner">Zero Beginner Primer</a></li>
         <li><a href="#examples" class="nav-link" data-tab="examples">50 Blueprints</a></li>
         <li><a href="#blueprints" class="nav-link" data-tab="blueprints">System Design</a></li>
-        <li><a href="#simulator" class="nav-link" data-tab="simulator">Filter Chain Simulator</a></li>
-        <li><a href="#generator" class="nav-link" data-tab="generator">Config Generator</a></li>
+        <li><a href="#simulator" class="nav-link" data-tab="simulator">Simulator</a></li>
+        <li><a href="#generator" class="nav-link" data-tab="generator">Config Gen</a></li>
         <li><a href="#jwt-debugger" class="nav-link" data-tab="jwt-debugger">JWT Inspector</a></li>
-        <li><a href="#quiz" class="nav-link" data-tab="quiz">Mastery Assessment</a></li>
+        <li><a href="#quiz" class="nav-link" data-tab="quiz">Assessment</a></li>
+        <li><a href="#interview" class="nav-link" data-tab="interview">Interview Vault (100)</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -316,6 +318,184 @@
           <button class="btn btn-sm btn-outline" onclick="window.app.selectedLevel='5'; window.app.switchTab('examples');">
             View Tier 5 Blueprints (17) →
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         NEW: TAB - ZERO BEGINNER PRIMER
+         ========================================== -->
+    <section id="tab-beginner" class="tab-pane">
+      <div class="section-header">
+        <div class="hero-pill">🌱 Zero Beginners Start Here</div>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">What is Spring Security, Why Do We Need It, & How to Implement It</h1>
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 850px; margin-bottom: 2.5rem;">
+          No confusing jargon. A complete beginner's foundation explaining what security actually does, the dangerous traps of DIY security, and a step-by-step tutorial to secure your first Spring Boot application in 5 minutes.
+        </p>
+      </div>
+
+      <!-- Part 1: What is Spring Security -->
+      <div class="primer-step-card">
+        <div class="primer-step-header">
+          <div class="primer-step-num">1</div>
+          <h2 class="primer-step-title">What is Spring Security?</h2>
+        </div>
+        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
+          Imagine you own a bank. You have a vault room containing money (your database and API controllers). 
+          Instead of making every bank teller and accountant stop their work to inspect visitor passports and check bags at their desks, you hire a <strong>professional security team</strong> to stand at the front doors.
+        </p>
+        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem;">
+          <strong>Spring Security is that professional security team for your Java application.</strong>
+          It acts as an interceptor line (a "filter chain") that stands between the internet and your business code. Before an incoming HTTP request is allowed to touch your Spring Controller, Spring Security intercepts it and asks two mandatory questions:
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-medium); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #38bdf8; font-size: 1rem; margin-bottom: 0.35rem;">1. Authentication (AuthN)</h4>
+            <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0;"><em>"Who are you?"</em> Verifies credentials (username + password, JWT token, or Google login).</p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-medium); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #10b981; font-size: 1rem; margin-bottom: 0.35rem;">2. Authorization (AuthZ)</h4>
+            <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0;"><em>"Where are you allowed to go?"</em> Checks if this specific identity has permission to call that endpoint.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: Why is it Needed -->
+      <div class="primer-step-card">
+        <div class="primer-step-header">
+          <div class="primer-step-num">2</div>
+          <h2 class="primer-step-title">Why Do We Need It? (The Fatal Traps of "DIY Security")</h2>
+        </div>
+        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.25rem;">
+          Beginner developers often say: <em>"Why do I need a whole framework? Can't I just write an if-statement in my Controller checking if the user is logged in?"</em>
+        </p>
+        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">
+          Here is why DIY security causes <strong>critical production disasters</strong>:
+        </p>
+
+        <div class="diy-comparison-grid">
+          <div class="diy-box diy-danger">
+            <h4 style="color: #f87171; font-size: 1rem; margin-bottom: 0.75rem;">❌ The DIY Developer's Approach</h4>
+            <ul style="color: #cbd5e1; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem; padding-left: 1.25rem;">
+              <li><strong>Timing Attacks</strong>: Writing <code>if (inputPassword.equals(dbPassword))</code> allows hackers to measure microsecond response times and guess passwords letter by letter!</li>
+              <li><strong>Session Fixation</strong>: Reusing session IDs allows attackers to steal logins via pre-crafted links.</li>
+              <li><strong>Missing CSRF Defense</strong>: Evil websites can trick logged-in users into transferring money without their knowledge.</li>
+              <li><strong>Thread Pollution</strong>: Storing user info in ThreadLocal leaks User A's data to User B when threads are recycled.</li>
+              <li><strong>Forgetfulness</strong>: If you forget to add your custom if-check to a new controller, that endpoint is permanently exposed to the public!</li>
+            </ul>
+          </div>
+
+          <div class="diy-box diy-success">
+            <h4 style="color: #34d399; font-size: 1rem; margin-bottom: 0.75rem;">✔ The Spring Security Approach</h4>
+            <ul style="color: #cbd5e1; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem; padding-left: 1.25rem;">
+              <li><strong>Constant-Time Hashing</strong>: Uses <code>MessageDigest.isEqual()</code> and slow BCrypt/Argon2 with work factor 12.</li>
+              <li><strong>Auto Session Migration</strong>: Automatically invalidates old session IDs and mints fresh ones on login.</li>
+              <li><strong>Built-in CSRF Protection</strong>: Synchronizer and double-submit token repositories out-of-the-box.</li>
+              <li><strong>Thread Isolation</strong>: Automatically cleans up <code>SecurityContextHolder</code> in a finally block on every request.</li>
+              <li><strong>Secure by Default</strong>: Unless you explicitly write <code>.permitAll()</code>, Spring Security blocks everything by default!</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 3: How to Implement -->
+      <div class="primer-step-card">
+        <div class="primer-step-header">
+          <div class="primer-step-num">3</div>
+          <h2 class="primer-step-title">How to Implement in Your App (Step-by-Step From Zero)</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <!-- Step A -->
+          <div>
+            <h4 style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 0.5rem;">Step 1: Add the Dependency</h4>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.75rem;">
+              Add <code style="color: #fde047;">spring-boot-starter-security</code> to your project. That is literally all it takes to activate the security engine!
+            </p>
+            <div class="code-container">
+              <pre><code>&lt;!-- Maven pom.xml --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+            </div>
+          </div>
+
+          <!-- Step B -->
+          <div>
+            <h4 style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 0.5rem;">Step 2: What Happens Immediately</h4>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.5rem;">
+              As soon as you restart your application:
+            </p>
+            <ol style="color: #cbd5e1; font-size: 0.95rem; padding-left: 1.5rem; line-height: 1.6;">
+              <li>Every endpoint in your app is immediately locked down.</li>
+              <li>A default user named <code style="color: #38bdf8;">user</code> is created.</li>
+              <li>A random temporary password is printed in your console log: <code style="color: #fde047;">Using generated security password: 9a7b-4c2d-...</code></li>
+            </ol>
+          </div>
+
+          <!-- Step C -->
+          <div>
+            <h4 style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 0.5rem;">Step 3: Write Your Modern SecurityConfiguration (Spring Boot 3)</h4>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 0.75rem;">
+              Create a configuration class and declare a <code style="color: #6db33f;">SecurityFilterChain</code> bean. Tell Spring which URLs are public and which require login:
+            </p>
+            <div class="code-container">
+              <pre><code>package com.example.demo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    // 1. Configure the cryptographic password encoder
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
+
+    // 2. Define the security gate rules
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/public/**", "/health").permitAll()  // Anyone can access
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")         // Only admins
+                .anyRequest().authenticated()                               // Everything else requires login
+            )
+            .httpBasic(Customizer.withDefaults())
+            .formLogin(Customizer.withDefaults());
+
+        return http.build();
+    }
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Step D -->
+          <div>
+            <h4 style="color: #38bdf8; font-size: 1.1rem; margin-bottom: 0.5rem;">Step 4: Where to Go Next</h4>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1rem;">
+              Now that you understand the foundation, you are ready to explore real production patterns:
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="window.app.switchTab('examples')">
+                Explore 50 Real-World Blueprints →
+              </button>
+              <button class="btn btn-outline" onclick="window.app.switchTab('interview')">
+                Read 100 Interview Q&As →
+              </button>
+              <button class="btn btn-outline" onclick="window.app.switchTab('simulator')">
+                Test the Filter Chain Simulator →
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -681,6 +861,52 @@
           <button id="quiz-btn-next" class="btn btn-primary" style="display: none;">Next Question →</button>
         </div>
       </div>
+    <!-- ==========================================
+         NEW: TAB - INTERVIEW VAULT (100 Q&As)
+         ========================================== -->
+    <section id="tab-interview" class="tab-pane">
+      <div class="section-header">
+        <div class="hero-pill">💼 Staff & Principal Architect Interview Prep</div>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Spring Security Interview Vault: 100 Production Q&As</h1>
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 900px; margin-bottom: 2rem;">
+          Master every layer of Spring Security. Each question includes both a <strong>Simple Plain-English Explanation</strong> (for conceptual clarity) and a <strong>16+ Years Experience Staff Architect Deep-Dive</strong> (explaining internal JVM mechanics, thread leaks, failure modes, and production tradeoffs).
+        </p>
+      </div>
+
+      <!-- Search & Category Toolbar -->
+      <div class="interview-search-bar">
+        <div class="search-box" style="flex: 2; min-width: 280px;">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="interview-search" class="search-input" placeholder="Search 100 interview questions (e.g. JWT, Proxy, CSRF, BCrypt, Zero-Trust)...">
+        </div>
+
+        <select id="interview-filter-category" class="filter-select" style="flex: 1; min-width: 200px;">
+          <option value="all">All 7 Categories</option>
+        </select>
+
+        <select id="interview-filter-level" class="filter-select" style="min-width: 170px;">
+          <option value="all">All Experience Levels</option>
+          <option value="Junior / Mid">Junior / Mid Level</option>
+          <option value="Senior">Senior Engineer</option>
+          <option value="Staff Architect (16+ Yrs)">Staff Architect (16+ Yrs)</option>
+        </select>
+      </div>
+
+      <!-- Controls & Count Bar -->
+      <div class="interview-stats-strip">
+        <span id="interview-count-badge" class="badge badge-level" style="font-size: 0.85rem; padding: 0.4rem 0.85rem;">
+          Showing 100 of 100 Interview Q&As
+        </span>
+        <div style="display: flex; gap: 0.75rem;">
+          <button id="interview-btn-expand" class="btn btn-sm btn-outline">📂 Expand All</button>
+          <button id="interview-btn-collapse" class="btn btn-sm btn-outline">📁 Collapse All</button>
+        </div>
+      </div>
+
+      <!-- Questions Accordion List -->
+      <div id="interview-list" class="interview-list">
+        <!-- Rendered dynamically by app.js from INTERVIEW_QUESTIONS -->
+      </div>
     </section>
 
   </main>
@@ -820,6 +1046,7 @@
   <!-- Core Scripts -->
   <script src="js/examples-data.js"></script>
   <script src="js/system-design-data.js"></script>
+  <script src="js/interview-data.js"></script>
   <script src="js/filter-chain-sim.js"></script>
   <script src="js/config-generator.js"></script>
   <script src="js/jwt-debugger.js"></script>

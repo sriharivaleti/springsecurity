@@ -15,6 +15,9 @@ class App {
     this.bookmarkedExamples = new Set(
       JSON.parse(localStorage.getItem("springsec_bookmarked_examples") || "[]")
     );
+    this.interviewSearch = "";
+    this.interviewCategory = "all";
+    this.interviewLevel = "all";
   }
 
   init() {
@@ -22,6 +25,8 @@ class App {
     this.bindSearchAndFilters();
     this.renderExamplesList();
     this.renderBlueprints();
+    this.bindInterviewControls();
+    this.renderInterviewQuestions();
     this.updateProgressMetrics();
 
     // Initialize sub-modules
@@ -48,7 +53,7 @@ class App {
   }
 
   switchTab(tabId) {
-    const validTabs = ["overview", "examples", "blueprints", "simulator", "generator", "jwt-debugger", "quiz"];
+    const validTabs = ["overview", "beginner", "examples", "blueprints", "simulator", "generator", "jwt-debugger", "quiz", "interview"];
     if (!validTabs.includes(tabId)) tabId = "overview";
 
     this.currentTab = tabId;
@@ -373,6 +378,150 @@ class App {
         </div>
       </div>
     `).join("");
+  }
+
+  bindInterviewControls() {
+    const s = document.getElementById("interview-search");
+    if (s) {
+      s.addEventListener("input", (e) => {
+        this.interviewSearch = e.target.value.toLowerCase().trim();
+        this.renderInterviewQuestions();
+      });
+    }
+
+    const cat = document.getElementById("interview-filter-category");
+    if (cat) {
+      cat.addEventListener("change", (e) => {
+        this.interviewCategory = e.target.value;
+        this.renderInterviewQuestions();
+      });
+
+      // Populate categories dynamically from INTERVIEW_QUESTIONS
+      if (typeof INTERVIEW_QUESTIONS !== "undefined") {
+        const categories = Array.from(new Set(INTERVIEW_QUESTIONS.map(q => q.category))).sort();
+        categories.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c;
+          opt.textContent = c;
+          cat.appendChild(opt);
+        });
+      }
+    }
+
+    const lvl = document.getElementById("interview-filter-level");
+    if (lvl) {
+      lvl.addEventListener("change", (e) => {
+        this.interviewLevel = e.target.value;
+        this.renderInterviewQuestions();
+      });
+    }
+
+    const btnExpand = document.getElementById("interview-btn-expand");
+    if (btnExpand) btnExpand.addEventListener("click", () => this.expandAllInterviews());
+
+    const btnCollapse = document.getElementById("interview-btn-collapse");
+    if (btnCollapse) btnCollapse.addEventListener("click", () => this.collapseAllInterviews());
+  }
+
+  renderInterviewQuestions() {
+    const list = document.getElementById("interview-list");
+    if (!list || typeof INTERVIEW_QUESTIONS === "undefined") return;
+
+    const filtered = INTERVIEW_QUESTIONS.filter(q => {
+      if (this.interviewCategory !== "all" && q.category !== this.interviewCategory) return false;
+      if (this.interviewLevel !== "all" && q.level !== this.interviewLevel) return false;
+      if (this.interviewSearch) {
+        const matchQ = q.question.toLowerCase().includes(this.interviewSearch);
+        const matchSimple = q.simpleAnswer.toLowerCase().includes(this.interviewSearch);
+        const matchDeep = q.architectDeepDive.toLowerCase().includes(this.interviewSearch);
+        const matchTags = q.tags.some(t => t.toLowerCase().includes(this.interviewSearch));
+        return matchQ || matchSimple || matchDeep || matchTags;
+      }
+      return true;
+    });
+
+    const countEl = document.getElementById("interview-count-badge");
+    if (countEl) countEl.textContent = `Showing ${filtered.length} of ${INTERVIEW_QUESTIONS.length} Interview Q&As`;
+
+    if (filtered.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <p>🔍 No interview questions match your filter. Try searching for 'JWT', 'CSRF', 'Proxy', or 'Zero-Trust'.</p>
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = filtered.map((q, idx) => `
+      <div class="interview-item" id="item-${q.id}">
+        <div class="interview-header" onclick="window.app.toggleInterview('${q.id}')">
+          <div class="interview-q-title">
+            <span class="interview-q-num">${q.id.toUpperCase()}</span>
+            <span>${q.question}</span>
+          </div>
+          <div class="interview-badges">
+            <span class="badge badge-category">${q.category}</span>
+            <span class="badge badge-diff ${q.level.includes('Staff') ? 'diff-staff-architect' : (q.level.includes('Senior') ? 'diff-advanced' : 'diff-intermediate')}">${q.level}</span>
+            <span class="interview-toggle-icon">▼</span>
+          </div>
+        </div>
+        <div class="interview-body">
+          <div class="answer-simple-box">
+            <div class="answer-label simple">
+              <span>💡 Simple Plain-English Answer (Executive Summary):</span>
+            </div>
+            <div class="answer-text">${q.simpleAnswer}</div>
+          </div>
+
+          <div class="answer-architect-box">
+            <div class="answer-label architect">
+              <span>🛡️ Staff / Principal Architect Deep-Dive (16+ Yrs Experience Level):</span>
+            </div>
+            <div class="answer-text">${q.architectDeepDive}</div>
+          </div>
+
+          <div class="interview-footer-row">
+            <div class="interview-tags">
+              ${q.tags.map(t => `<span class="tag-pill">#${t}</span>`).join("")}
+            </div>
+            <button class="btn btn-sm btn-outline" onclick="window.app.copyInterview('${q.id}', event)">
+              📋 Copy Answer
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  toggleInterview(id) {
+    const el = document.getElementById(`item-${id}`);
+    if (el) {
+      el.classList.toggle("open");
+    }
+  }
+
+  expandAllInterviews() {
+    document.querySelectorAll(".interview-item").forEach(item => item.classList.add("open"));
+  }
+
+  collapseAllInterviews() {
+    document.querySelectorAll(".interview-item").forEach(item => item.classList.remove("open"));
+  }
+
+  copyInterview(id, event) {
+    if (event) event.stopPropagation();
+    const q = INTERVIEW_QUESTIONS.find(item => item.id === id);
+    if (!q) return;
+
+    const textToCopy = `Question: ${q.question}\n\nSimple Answer:\n${q.simpleAnswer}\n\nStaff Architect Deep-Dive:\n${q.architectDeepDive}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const btn = event ? event.target : null;
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = "✔ Copied!";
+        setTimeout(() => btn.innerHTML = orig, 1800);
+      }
+    });
   }
 }
 
