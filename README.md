@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SpringSec Master 🛡️
 ## The Definitive Zero-to-Mastery Spring Security 6 & System Design Learning Platform
 
@@ -108,3 +109,7 @@ Right-click `index.html` and click **"Open with Live Server"**.
 
 ## 📄 License
 Released under the Apache 2.0 License. Built for the global Java & Spring developer community.
+=======
+# springsecurity
+Learning Spring Security
+>>>>>>> b7f1ab352fb26174a54836391a36bdec0f07efc9
